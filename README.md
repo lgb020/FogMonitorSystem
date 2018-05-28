@@ -33,6 +33,6 @@ npm test
 ```
 ## System shot
 
-![系统截图1](https://github.com/yjtmD/FogMonitorSystem/screen_shot/shot-1.png)
+![系统截图1](https://github.com/yjtmD/FogMonitorSystem/raw/master/screen_shot/shot-1.png)
 
-![系统截图2](https://github.com/yjtmD/FogMonitorSystem/screen_shot/shot-2.png)
+![系统截图2](https://github.com/yjtmD/FogMonitorSystem/raw/master/screen_shot/shot-2.png)
