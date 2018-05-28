@@ -1,0 +1,93 @@
+html, body {
+  height: 100%;
+  overflow: visible;
+  background: #F5F9FC !important;
+  font-family: "Microsoft YaHei" !important;
+}
+
+#app {
+  height: 100%;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+p {
+  padding: 0;
+  margin: 0;
+}
+
+em{
+  font-style: normal;
+}
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden
+}
+
+// 人车经过预警，自动查岗
+.warning-wrap{
+  .result-right {
+    width: 950px;
+    float: right;
+    background-color: #fff;
+    box-shadow: 0 6px 10px 1px #ccc;
+
+    .paper-title {
+      height: 35px;
+      line-height: 35px;
+      padding: 0 10px;
+      background-color: #C9DFEC;
+      color: #0084df;
+      font-size: 16px;
+      i {
+        padding: 5px;
+        color: #f60;
+        font-style: normal;
+        font-size: 14px;
+      }
+
+      .mu-raised-button {
+        margin-top: 3px;
+        float: right;
+        height: 28px;
+        width: 40px;
+        font-size: 14px;
+      }
+    }
+
+    .paper-body {
+      padding: 15px;
+    }
+  }
+  .result-left {
+    width: 250px;
+    float: left;
+    background-color: #fff;
+    box-shadow: 0 6px 10px 1px #ccc;
+    margin: 0 0 35px 0;
+
+    .paper-title {
+      height: 35px;
+      line-height: 35px;
+      font-size: 16px;
+      text-align: center;
+      color: #0084df;
+      background-color: #D4EEFF;
+    }
+
+    .paper-body {
+      padding: 10px;
+    }
+  }
+}
+

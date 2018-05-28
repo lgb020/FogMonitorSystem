@@ -1,0 +1,29 @@
+.pcc-tree-wrapper {
+  position: relative;
+  .tree-content {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    border: 1px solid #dddddd;
+    border-top: 0;
+    background: #fff;
+    z-index: 110;
+    overflow: hidden;
+  }
+  .pcc-tree {
+    margin-top: 0;
+    width: 98%;
+    height: 250px;
+    overflow-y: scroll;
+    background: white;
+    padding: 0 5px 0 0;
+  }
+  .location-area {
+    position: relative;
+    width: 100% !important;
+    z-index: 11;
+    cursor: pointer;
+  }
+}

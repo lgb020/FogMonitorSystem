@@ -1,0 +1,213 @@
+
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>图标分组</title>
+    <style>
+        html,
+        body,
+        #container {
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+        }
+
+        #loadingTip {
+            position: absolute;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            padding: 3px 10px;
+            background: red;
+            color: #fff;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+<div id="container"></div>
+<script>
+    var mapTileHost = '114.215.146.210:25003';
+    var mapApiHost = 'localhost/amap'
+</script>
+<script type="text/javascript" src='http://localhost/amap/js/mapapi.js'></script>
+<!-- UI组件库 1.0 -->
+<script src="http://localhost/amap/js/ui.js"></script>
+<script type="text/javascript">
+  //创建地图
+  var map = new AMap.Map('container', {
+    zoom: 4
+  });
+
+  map.on('complete', function() {
+    console.log('das')
+    map.plugin(["AMap.ToolBar"], function() {
+      map.addControl(new AMap.ToolBar());
+    })
+  })
+
+  // AMap.plugin(['AMap.ToolBar'], function () {
+  //   console.log(new AMap.ToolBar())
+  //   map.addControl(new AMap.ToolBar())
+  // })
+  //just some colors
+  var colors = [
+    "#3366cc", "#dc3912", "#ff9900", "#109618", "#990099", "#0099c6", "#dd4477", "#66aa00",
+    "#b82e2e", "#316395", "#994499", "#22aa99", "#aaaa11", "#6633cc", "#e67300", "#8b0707",
+    "#651067", "#329262", "#5574a6", "#3b3eac"
+  ];
+
+
+  function initPage(PointSimplifier, $) {
+
+    var pointSimplifierIns, groupStyleMap;
+
+    pointSimplifierIns = new PointSimplifier({
+      zIndex: 115,
+      //autoSetFitView: false,
+      map: map, //所属的地图实例
+
+      getPosition: function(item) {
+
+        var lngLatLine = item.lngLatLine;
+
+        if (!lngLatLine) {
+          return null;
+        }
+
+        var parts = lngLatLine.split(',');
+
+        return [parseFloat(parts[0]), parseFloat(parts[1])];
+      },
+      getHoverTitle: function(dataItem, idx) {
+        return '序号: ' + idx;
+      },
+      //使用GroupStyleRender
+      renderConstructor: PointSimplifier.Render.Canvas.GroupStyleRender,
+      renderOptions: {
+        //点的样式
+        pointStyle: {
+          width: 5,
+          height: 5,
+          fillStyle:'#A2D0FA'
+        },
+        getGroupId: function(item, idx) {
+
+          return item.groupId;
+        },
+        groupStyleOptions: function(gid) {
+
+          return groupStyleMap[gid];
+        }
+
+      }
+    });
+
+    function onIconLoad() {
+      pointSimplifierIns.renderLater();
+    }
+
+    function onIconError(e) {
+      alert('图片加载失败！');
+    }
+
+    groupStyleMap = {
+      '0': {
+        pointStyle: {
+          //绘制点占据的矩形区域
+          content: PointSimplifier.Render.Canvas.getImageContent(
+            './imgs/bike.png', onIconLoad, onIconError),
+          //宽度
+          width: 16,
+          //高度
+          height: 16,
+          //定位点为中心
+          offset: ['-50%', '-50%'],
+          fillStyle: null,
+          //strokeStyle: null
+        }
+      },
+      '1': {
+        pointStyle: {
+          //绘制点占据的矩形区域
+          content: PointSimplifier.Render.Canvas.getImageContent(
+            './imgs/people.png', onIconLoad, onIconError),
+          //宽度
+          width: 16,
+          //高度
+          height: 16,
+          //定位点为中心
+          offset: ['-50%', '-50%'],
+          fillStyle: null,
+          // strokeStyle: null
+        }
+      },
+      '2': {
+        pointStyle: {
+          //绘制点占据的矩形区域
+          content: PointSimplifier.Render.Canvas.getImageContent(
+            './imgs/truck.png', onIconLoad, onIconError),
+          //宽度
+          width: 16,
+          //高度
+          height: 16,
+          //定位点为中心
+          offset: ['-50%', '-50%'],
+          fillStyle: null,
+          //strokeStyle: null
+        }
+      },
+      '3': {
+        pointStyle: {
+          //绘制点占据的矩形区域
+          content: PointSimplifier.Render.Canvas.getImageContent(
+            './imgs/taxi.png', onIconLoad, onIconError),
+          //宽度
+          width: 16,
+          //高度
+          height: 16,
+          //定位点为中心
+          offset: ['-50%', '-50%'],
+          fillStyle: null,
+          //strokeStyle: null
+        }
+      }
+    };
+
+    $('<div id="loadingTip">加载数据，请稍候...</div>').appendTo(document.body);
+    $.get('imgs/10w.txt', function(csv) {
+
+      $('#loadingTip').remove();
+
+      var lines = csv.split('\n'),
+        data = [];
+
+      for (var i = 0, len = lines.length; i < len; i++) {
+
+        data.push({
+          lngLatLine: lines[i],
+          groupId: i % 5
+        });
+      }
+
+      pointSimplifierIns.setData(data);
+    });
+  }
+
+  AMapUI.load(['ui/misc/PointSimplifier', 'lib/$'], function(PointSimplifier, $) {
+
+    if (!PointSimplifier.supportCanvas) {
+      alert('当前环境不支持 Canvas！');
+      return;
+    }
+
+    initPage(PointSimplifier, $);
+  });
+</script>
+</body>
+
+</html>
