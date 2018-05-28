@@ -22,9 +22,9 @@ var YISACONF = {
 }
 var mapTileHost = '114.215.146.210:25003'
 var mapApiHost = 'localhost/amap'
-document.write('<script src="http://' + mapApiHost + '/js/mapapi.js" ><\/script>')
+document.write('<script src="http://webapi.amap.com/maps?v=1.4.6&key=8d03b875f60373bba45093e964557f31" ><\/script>')
 // UI组件库 1.0
-document.write('<script src="http://' + mapApiHost + '/js/ui.js" ><\/script>')
+document.write('<script src="http://webapi.amap.com/ui/1.0/main.js?v=1.0.11"><\/script>')
 
 var sessionStorageTransfer = function (event) {
   if (!event) { event = window.event }
